@@ -6,15 +6,15 @@ import hashlib
 
 @app.route('/api/sketches', methods=['POST'])
 def add_sketch():
-    url = request.form.get('url', None)
-    filename = request.form.get('filename', None)
-    description = request.form.get('description', None)
+    url = request.form.get('url', '')
+    filename = request.form.get('filename', '')
+    description = request.form.get('description', '')
     code = request.form.get('code', None)
 
     if not code:
         return 'You forgot to paste your sketch!', 400
 
-    hashUrl = hashlib.sha1(code.encode("UTF-8")).hexdigest();
+    hashUrl = hashlib.sha1((code + filename + description).encode("UTF-8")).hexdigest();
     hashUrl[:10]
     print(hashUrl[:10])
 
@@ -24,8 +24,8 @@ def add_sketch():
         'description': description,
         'code': code
     })
-
-    return 'OK', 200
+    return hashUrl[:10]
+    #return 'OK', 200
 
 @app.route('/api/sketches/<url_str>', methods=['GET'])
 def get_sketch_by_url(url_str):

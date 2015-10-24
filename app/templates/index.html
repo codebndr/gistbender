@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../static/css/editor.css">
 <link rel="stylesheet" type="text/css" href="../static/css/common.css">
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 <!-- Using bootstrap 2.3 to preserve copied styles from codebender page -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.0/css/bootstrap.min.css">
 <!--<link rel="stylesheet" href="../static/fonts/font-awesome-4.4.0/css/font-awesome.min.css">-->
@@ -14,21 +15,24 @@
 <div id="wrapper" class="container">
   <div id="container_top" class="row">
       <div class="span12">
-          {% if name %}
-          <h3>Sketch: {{ name }}</h3>
+          <div class>
+          {% if filename %}
+          <h3>Sketch: {{ filename }}</h3>
+          <input id="sketch_filename" type="text" placeholder="{{ filename }}"></input>
           {% else %}
           <h3>Share your sketch</h3>
-          {% endif %}
           <input id="sketch_filename" type="text" placeholder="Sketch filename..."></input>
+          {% endif %}
           <button class="btn btn-success" id="share_sketch">
                Get Link
           </button>
-      </div>
-      <div class="span12">
-          <label id="sketch_url">asdf</label>
+          {% if url %}
+          <span id="sketch_url">Share using this URL: /sketch/{{ url }}</span>
+          {% else %}
+          {% endif %}
+          <hr class="soften" />
       </div>
   </div>
-  <hr class="soften" />
   <div id="container_bottom" class="row">
       <div id="container_top_left" class="span5">
           <div id="operation_container">
@@ -57,7 +61,11 @@
       </div>
       <div class="span7">
           <div id="sketch_description_panel" class="row">
+              {% if description %}
+              <input id="sketch_description" type="text" placeholder="{{ description }}" class="form-control">
+              {% else %}
               <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
+              {% endif %}
           </div>
           <div class="row">
           {% if code %}
@@ -90,7 +98,7 @@ void loop()
   //Wait for a second
   delay(1000);
 }</pre>
-{% endif %}
+          {% endif %}
               <span id="editor_info_panel">
                   <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
                       <i class="icon-indent-right"></i>
@@ -146,14 +154,16 @@ void loop()
         $('#share_sketch').click(function(){
             console.log("submitting sketch");
 
-            // generate hash from sketch filename
+            // add sketch to database
             $.post('/api/sketches', {
                 filename: $('#sketch_filename').val(),
                 description: $('#sketch_description').val(),
                 code: editor.getSession().getValue()
-            });
-            $.get('/api/sketches/testUrl', function(data){
-                $('#sketch_url').text(data.url);
+
+            // retrieve sketch url postfix
+            }, function(data){
+                $('#sketch_url').text("Share using this URL: ");
+                $('#sketch_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
             });
         });
     });

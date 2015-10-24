@@ -12,12 +12,15 @@ class Sketch(Document):
         'url': unicode,
         'filename': unicode,
         'description': unicode,
-        'code': unicode
-       # 'sketch': ObjectId
+        'code': unicode,
+        '_id': ObjectId
     } 
 
     required_fields = ['url','filename','code']
     default_values = {
+        'url': u''
+        'filename': u''
         'description': u''
+        'code': u''
     }
     use_dot_notation = True

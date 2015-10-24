@@ -11,16 +11,16 @@ __all__ = [os.path.basename(f)[:-3]
 
 @app.route('/')
 def main():
-  return render_template('index.html')
+    return render_template('index.html')
 
-@app.route('/<sketch_url>', methods=['GET'])
-def view_sketch(sketch_url):
+@app.route('/sketch/<url>', methods=['GET'])
+def view_sketch(url):
     sketch = db.sketches.find_one({
-        'url': sketch_url
+        'url' : url
     })  
     data = {'url': sketch['url'],
             'filename': sketch['filename'],
             'description': sketch['description'],
-            'code': sketch['code']
-    }   
-    return render_template('index.html', name=data['url'], code=data['code'])
+            'code': sketch['code']}
+        
+    return render_template('index.html', url=data['url'], code=data['code'], filename=data['filename'], description=data['description'])
