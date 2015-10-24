@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Gist</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../static/css/editor.css">
+<link rel="stylesheet" type="text/css" href="../static/css/common.css">
+<!-- Using bootstrap 2.3 to preserve copied styles from codebender page -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/2.3.0/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="../static/fonts/font-awesome-4.4.0/css/font-awesome.min.css">-->
+</head>
+<body>
+
+<div id="wrapper" class="container">
+  <div id="container_top" class="row">
+      <div class="span12">
+          <h3>Share your sketch</h3>
+          <input id="sketch_filename" type="text" placeholder="Sketch filename..."></input>
+          <button class="btn btn-success" id="share_sketch">
+               Get Link
+          </button>
+      </div>
+      <div class="span12">
+          <label id="sketch_url">asdf</label>
+      </div>
+  </div>
+  <hr class="soften" />
+  <div id="container_bottom" class="row">
+      <div id="container_top_left" class="span5">
+          <div id="operation_container">
+              <pre id="operation_output"></pre>
+              <div id="progress" class="progress progress-striped active">
+                  <div id="progress_val" class="bar" style="width:0%;"></div>
+              </div>
+          </div>
+          <select id="cb_cf_boards"></select>
+          <button class="btn btn-success" id="cb_cf_verify_btn" disabled="disabled">
+              <i class="icon-check"></i> Verify Code
+          </button>
+          <select id="cb_cf_ports" class="dropdown-select"></select>
+          <button class ="btn btn-success" id="cb_cf_flash_btn" disabled="disabled">
+              <i class="icon-arrow-right"></i> Run on Arduino
+          </button>
+          <select id="cb_cf_programmers"> </select>
+          <button class="btn" id="cb_cf_flash_with_prog_btn" disabled="disabled">
+          <i class="icon-upload"></i> Flash w/ Programmer
+          </button><br>
+          <span id="#speed_label">Speed:</span> <select id="cb_cf_baud_rates"></select>
+          <button class="btn" id="cb_cf_serial_monitor_connect">
+              <i class="icon-list-alt"></i> Connect
+          </button>
+          <div id="cb_cf_serial_monitor"></div>
+      </div>
+      <div class="span7">
+          <div id="sketch_description_panel" class="row">
+              <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
+          </div>
+          <div class="row">
+              <pre id="editor">/* 
+This basic example turns the built in LED on for one second,
+then off for one second, repeatedly.
+*/
+
+// Pin 13 has a LED connected so we give it a name:
+int led = 13;
+
+// the setup routine runs once when you press reset:
+void setup()
+{
+  // initialize the digital pin as an output.
+  pinMode(led, OUTPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop()
+{
+  //Set the LED pin to HIGH. This gives power to the LED and turns it on
+  digitalWrite(led, HIGH);
+  //Wait for a second
+  delay(1000);
+  //Set the LED pin to LOW. This turns it off
+  digitalWrite(led, LOW);
+  //Wait for a second
+  delay(1000);
+}</pre>
+
+              <span id="editor_info_panel">
+                  <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
+                      <i class="icon-indent-right"></i>
+                  </a>
+                  <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
+                      <i class="icon-keyboard"></i>
+                  </a>
+              </span>
+              <span id="compile_output_close">
+                  <button id="compiler_output_close_btn" type="button" class="close">x</button>
+              </span>
+              <span id="sketch_info">
+                  <div id="lines">Number of lines: <span id="line_count">0</span></div>
+                  <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
+              </span>
+              <pre id="compile_output"></pre>
+          </div>
+      </div>
+  </div> 
+</div>
+    
+<script src="../static/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/textmate");
+    editor.getSession().setMode("ace/mode/c_cpp");
+    editor.setShowPrintMargin(false);
+    
+    editor.getSession().on('change', function(){
+        $("#line_count").html(editor.getSession().getValue().split("\n").length);
+    });
+
+    function getFiles(){
+        console.log("returning from get files");
+        return {"sketch.ino": editor.getSession().getValue()};
+    }
+
+    $('#cb_cf_verify_btn').click(function(){
+        $('#operation_container').slideDown(750);
+    });
+
+    $(document).ready(function(){
+        $("#line_count").html(editor.getSession().getValue().split("\n").length);
+        if ($('#cb_cf_verify_btn').prop('disabled')){
+            $('#operation_container').hide();
+        }
+        console.log("docready");
+        compilerflasher = new compilerflasher(getFiles);
+        console.log("finished getting ready");
+
+        // creating a new sketch url
+        $('#share_sketch').click(function(){
+            console.log("submitting sketch");
+
+            // generate hash from sketch filename
+            $.post('/api/sketches', {
+                filename: $('#sketch_filename').val(),
+                description: $('#sketch_description').val(),
+                code: editor.getSession().getValue()
+            });
+            $.get('/api/sketches/testUrl', function(data){
+                $('#sketch_url').text(data.url);
+            });
+        });
+    });
+</script>
+<script src="https://codebender.cc/embed/compilerflasher.js" type="text/javascript"></script>
+</body>
+</html>
