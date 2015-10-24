@@ -14,7 +14,11 @@
 <div id="wrapper" class="container">
   <div id="container_top" class="row">
       <div class="span12">
+          {% if name %}
+          <h3>Sketch: {{ name }}</h3>
+          {% else %}
           <h3>Share your sketch</h3>
+          {% endif %}
           <input id="sketch_filename" type="text" placeholder="Sketch filename..."></input>
           <button class="btn btn-success" id="share_sketch">
                Get Link
@@ -56,6 +60,9 @@
               <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
           </div>
           <div class="row">
+          {% if code %}
+          <pre id="editor">{{ code }}</pre>
+          {% else %}
               <pre id="editor">/* 
 This basic example turns the built in LED on for one second,
 then off for one second, repeatedly.
@@ -83,7 +90,7 @@ void loop()
   //Wait for a second
   delay(1000);
 }</pre>
-
+{% endif %}
               <span id="editor_info_panel">
                   <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
                       <i class="icon-indent-right"></i>
