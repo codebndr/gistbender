@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Gist</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">-->
 <link rel="stylesheet" type="text/css" href="../static/css/editor.css">
 <link rel="stylesheet" type="text/css" href="../static/css/common.css">
 <link rel="stylesheet" type="text/css" href="../static/css/style.css">
@@ -11,10 +11,16 @@
 <!--<link rel="stylesheet" href="../static/fonts/font-awesome-4.4.0/css/font-awesome.min.css">-->
 </head>
 <body>
-
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <A class="brand" href="#">GistBender</a>
+        </div>
+    </div>
+</div>
 <div id="wrapper" class="container">
-  <div id="container_top" class="row">
-      <div class="span12">
+    <div id="container_top" class="row">
+        <div class="span12">
           <div class>
           {% if filename %}
           <h3>Sketch: {{ filename }}</h3>
@@ -31,8 +37,8 @@
           {% else %}
           {% endif %}
           <hr class="soften" />
-      </div>
-  </div>
+        </div>
+    </div>
   <div id="container_bottom" class="row">
       <div id="container_top_left" class="span5">
           <div id="operation_container">
@@ -162,6 +168,8 @@ void loop()
 
             // retrieve sketch url postfix
             }, function(data){
+                console.log("url: " + data);
+                $('#sketch_url').slideDown(750);
                 $('#sketch_url').text("Share using this URL: ");
                 $('#sketch_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
             });
