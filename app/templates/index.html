@@ -16,88 +16,88 @@
 <body>
 <div id="wrapper" class="container">
     <div class="navbar navbar-fixed-top navbar-default">
-        <div class="container col-sm-12 col-md-12">
             <div class="container"><a class="navbar-brand" href="#">gistbender</a>
             </div>
-        </div>
     </div>
     <div id="container_top" class="row">
         <div class="col-sm-12 col-md-12">
+            <div class="row">
             {% if description %}
             <h4>Sketch: {{ description }}</h4>
             <input id="sketch_description" type="text" placeholder="{{ description }}" class="form-control">
             {% else %}
-            <h4>Share your sketch</h4>
             <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
             {% endif %}
-            
-            <button class="btn btn-success" id="share_sketch">
-               Get Link
-            </button>
-            {% if url %}
-            <span id="sketch_url">Share using this URL: /sketch/{{ url }}</span>
-            {% else %}
-            {% endif %}
-            <hr class="soften">
+            </div>
         </div>
     </div>
     <div id="container_bottom" class="row">
         <div class="col-sm-12 col-md-12">
-            <div class="col-sm-5 col-md-5" id="container_top_left">
-                <div id="operation_container">
-                    <pre id="operation_output"></pre>
-                    <div id="progress" class="progress progress-striped active">
-                        <div id="progress_val" class="progress-bar" style="width:0%;"></div>
+            <div class="row">
+                <div class="col-sm-3 col-md-3" id="controls">
+                    <!--<div id="operation_container">
+                        <pre id="operation_output"></pre>
+                        <div id="progress" class="progress progress-striped active">
+                            <div id="progress_val" class="progress-bar" style="width:0%;"></div>
+                        </div>
+                    </div>-->
+                    <ul class="nav nav-sidebar">
+                        <li><select id="cb_cf_boards"></select></li>
+                        <li><button class="btn btn-success" id="cb_cf_verify_btn" disabled="disabled">
+                          <i class="icon-check"></i> Verify Code
+                        </button></li>
+                        <li><select id="cb_cf_ports" class="dropdown-select"></select></li>
+                        <li><button class="btn btn-success" id="cb_cf_flash_btn" disabled="disabled">
+                          <i class="icon-arrow-right"></i> Run on Arduino
+                        </button></li>
+                        <li><select id="cb_cf_programmers"> </select></li>
+                        <li><button class="btn btn-default" id="cb_cf_flash_with_prog_btn" disabled="disabled">
+                        <i class="icon-upload"></i> Flash w/ Programmer
+                        </button></li>
+                        <li><span id="#speed_label">Speed:</span></li> 
+                        <li><select id="cb_cf_baud_rates"></select></li>
+                        <li><button class="btn btn-default" id="cb_cf_serial_monitor_connect">
+                          <i class="icon-list-alt"></i> Connect
+                        </button></li>
+                        <li><div id="cb_cf_serial_monitor"></div></li>
+                        <br>
+                        <li><button class="btn btn-success" id="share_sketch">
+                           Create Sketch
+                        </button></li>
+                        <li id="generated_url"></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-md-9">
+                    <div id="sketch_filename_panel" class="row">
+                        {% if filename %}
+                        <input id="sketch_filename" type="text" placeholder="{{ filename }}" class="form-control">
+                        {% else %}
+                        <input id="sketch_filename" type="text" placeholder="Sketch filename..." class="form-control">
+                        {% endif %}
                     </div>
-                </div>
-                <select id="cb_cf_boards"></select>
-                <button class="btn btn-success" id="cb_cf_verify_btn" disabled="disabled">
-                  <i class="icon-check"></i> Verify Code
-                </button>
-                <select id="cb_cf_ports" class="dropdown-select"></select>
-                <button class="btn btn-success" id="cb_cf_flash_btn" disabled="disabled">
-                  <i class="icon-arrow-right"></i> Run on Arduino
-                </button>
-                <select id="cb_cf_programmers"> </select>
-                <button class="btn btn-default" id="cb_cf_flash_with_prog_btn" disabled="disabled">
-                <i class="icon-upload"></i> Flash w/ Programmer
-                </button><br>
-                <span id="#speed_label">Speed:</span> <select id="cb_cf_baud_rates"></select>
-                <button class="btn btn-default" id="cb_cf_serial_monitor_connect">
-                  <i class="icon-list-alt"></i> Connect
-                </button>
-                <div id="cb_cf_serial_monitor"></div>
-            </div>
-            <div class="col-sm-7 col-md-7">
-                <div id="sketch_filename_panel" class="row">
-                    {% if filename %}
-                    <input id="sketch_filename" type="text" placeholder="{{ filename }}" class="form-control">
-                    {% else %}
-                    <input id="sketch_filename" type="text" placeholder="Sketch filename..." class="form-control">
-                    {% endif %}
-                </div>
-                <div class="row">
-                    {% if code %}
-                    <pre id="editor">{{ code }}</pre>
-                    {% else %}
-                    <pre id="editor">/* This basic example turns the built in LED on for one second,</pre>
-                    {% endif %}
-                    <span id="editor_info_panel">
-                        <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
-                            <i class="icon-indent-right"></i>
-                        </a>
-                        <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
-                            <i class="icon-keyboard"></i>
-                        </a>
-                    </span>
-                    <span id="compile_output_close">
-                        <button id="compiler_output_close_btn" type="button" class="close">x</button>
-                    </span>
-                    <span id="sketch_info">
-                        <div id="lines">Number of lines: <span id="line_count">0</span></div>
-                        <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
-                    </span>
-                    <pre id="compile_output"></pre>
+                    <div class="row">
+                        {% if code %}
+                        <pre id="editor">{{ code }}</pre>
+                        {% else %}
+                        <pre id="editor">/* This basic example turns the built in LED on for one second,</pre>
+                        {% endif %}
+                        <span id="editor_info_panel">
+                            <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
+                                <i class="icon-indent-right"></i>
+                            </a>
+                            <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
+                                <i class="icon-keyboard"></i>
+                            </a>
+                        </span>
+                        <span id="compile_output_close">
+                            <button id="compiler_output_close_btn" type="button" class="close">x</button>
+                        </span>
+                        <span id="sketch_info">
+                            <div id="lines">Number of lines: <span id="line_count">0</span></div>
+                            <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
+                        </span>
+                        <pre id="compile_output"></pre>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,13 +122,14 @@
     }
 
     $('#cb_cf_verify_btn').click(function(){
-        $('#operation_container').slideDown(750);
+    //    $('#operation_container').slideDown(750);
     });
 
     $(document).ready(function(){
+        $('#generated_url').hide();
         $("#line_count").html(editor.getSession().getValue().split("\n").length);
         if ($('#cb_cf_verify_btn').prop('disabled')){
-            $('#operation_container').hide();
+        //    $('#operation_container').hide();
         }
         console.log("docready");
         compilerflasher = new compilerflasher(getFiles);
@@ -147,9 +148,8 @@
             // retrieve sketch url postfix
             }, function(data){
                 console.log("url: " + data);
-                $('#sketch_url').slideDown(750);
-                $('#sketch_url').text("Share using this URL: ");
-                $('#sketch_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
+                $('#generated_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
+                $('#generated_url').slideDown(400);
             });
         });
     });

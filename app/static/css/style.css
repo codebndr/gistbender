@@ -32,6 +32,10 @@ h2 {
 #sketch_description {
     background-color: #efefef;
 }
+#sketch_filename_panel {
+    padding: 10px;
+    background-color: #eee;
+}
 #container_bottom {
     margin-bottom: 10px;
 }
@@ -51,16 +55,32 @@ h2 {
 #selection {
     width: 250px;
 }
-#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect {
+#controls {
+    padding: 10px 0px 10px 10px;
+    background-color: #efefef;
+}
+#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect, #share_sketch{
+    display:block;
     margin-bottom: 10px;
-    width: 180px;
+    width: 100%;
+    border:0;
+    border-radius: 0;
 }
-#cb_cf_boards, #cb_cf_ports, #cb_cf_programmers {
-    width: 180px;
+#share_sketch {
+    margin-bottom:0;
 }
-#cb_cf_baud_rates {
-    width: 133px;
-} 
+#cb_cf_boards, #cb_cf_ports, #cb_cf_programmers, #cb_cf_baud_rates {
+    display:block;
+    width: 100%;
+    border: 0;
+    background-color: #ccc;
+    height: 35px;
+}
+#generated_url {
+    font-weight: bold;
+    padding: 10px;
+    background-color: #fff;
+}
 #compile_output {
     position: absolute;
     bottom: 0;
