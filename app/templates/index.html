@@ -16,7 +16,11 @@
 <body>
 <div id="wrapper" class="container">
     <div class="navbar navbar-fixed-top navbar-default">
-            <div class="container"><a class="navbar-brand" href="#">gistbender</a>
+            <div class="container">
+            <a class="navbar-brand" href="#">
+                <!--<img src="../static/images/codebender_hq_large.png" style="height:30px;">-->
+                gistbender
+            </a>
             </div>
     </div>
     <div id="container_top" class="row">
@@ -81,22 +85,24 @@
                         {% else %}
                         <pre id="editor">/* This basic example turns the built in LED on for one second,</pre>
                         {% endif %}
-                        <span id="editor_info_panel">
-                            <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
-                                <i class="icon-indent-right"></i>
-                            </a>
-                            <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
-                                <i class="icon-keyboard"></i>
-                            </a>
-                        </span>
-                        <span id="compile_output_close">
-                            <button id="compiler_output_close_btn" type="button" class="close">x</button>
-                        </span>
-                        <span id="sketch_info">
-                            <div id="lines">Number of lines: <span id="line_count">0</span></div>
-                            <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
-                        </span>
-                        <pre id="compile_output"></pre>
+                        <div id="additional_info_panel">
+                            <span id="editor_info_panel">
+                                <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
+                                    <i class="icon-indent-right"></i>
+                                </a>
+                                <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
+                                    <i class="icon-keyboard"></i>
+                                </a>
+                            </span>
+                            <span id="compile_output_close">
+                                <button id="compiler_output_close_btn" type="button" class="close">x</button>
+                            </span>
+                            <span id="sketch_info">
+                                <div id="lines">Number of lines: <span id="line_count">0</span></div>
+                                <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
+                            </span>
+                            <pre id="compile_output"></pre>
+                        </div>
                     </div>
                 </div>
             </div>
