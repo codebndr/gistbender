@@ -115,3 +115,14 @@ h2 {
     padding: 10px;
     border-radius: 2px; 
 }
+#serial_monitor {
+    background-color: #6F95BB;
+    border-radius: 3px;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+#serial_monitor > #cb_cf_operation_output > a {
+    color: #fff;
+    font-style: italic;
+}
