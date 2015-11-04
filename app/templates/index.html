@@ -121,13 +121,10 @@
         $('#generated_url').hide();
         $("#line_count").html(editor.getSession().getValue().split("\n").length);
 
-        console.log("docready");
         compilerflasher = new compilerflasher(getFiles);
-        console.log("finished getting ready");
 
         // creating a new sketch url
         $('#share_sketch').click(function(){
-            console.log("submitting sketch");
 
             // add sketch to database
             $.post('/api/sketches', {
@@ -137,7 +134,6 @@
 
             // retrieve sketch url postfix
             }, function(data){
-                console.log("url: " + data);
                 $('#generated_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
                 $('#generated_url').slideDown(400);
             });
@@ -145,6 +141,5 @@
     });
 </script>
 
-</div>
 </body>
 </html>
