@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Gist</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,400italic,500,700|Patua+One|Droid+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="wrapper" class="container">
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <a class="navbar-brand" href="#">gistbender</a>
+        </div>
+    </div>
+    <div id="container_top" class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="row">
+            {% if description %}
+            <h4>Sketch: {{ description }}</h4>
+            <input id="sketch_description" type="text" placeholder="{{ description }}" class="form-control">
+            {% else %}
+            <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="container_bottom" class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-3 col-md-3" id="controls">
+                    <ul class="nav nav-sidebar">
+                        <li><select id="cb_cf_boards"></select></li>
+                        <li><button class="btn btn-success" id="cb_cf_verify_btn" disabled="disabled">
+                          <i class="glyphicon glyphicon-ok"></i> Verify Code
+                        </button></li>
+                        <li><select id="cb_cf_ports" class="dropdown-select"></select></li>
+                        <li><button class="btn btn-success" id="cb_cf_flash_btn" disabled="disabled">
+                          <i class="glyphicon glyphicon-arrow-right"></i> Run on Arduino
+                        </button></li>
+                        <li><select id="cb_cf_programmers"> </select></li>
+                        <li><button class="btn btn-default" id="cb_cf_flash_with_prog_btn" disabled="disabled">
+                        <i class="glyphicon glyphicon-upload"></i> Flash w/ Programmer
+                        </button></li>
+                        <li><span id="#speed_label">Speed:</span></li> 
+                        <li><select id="cb_cf_baud_rates"></select></li>
+                        <li><button class="btn btn-default" id="cb_cf_serial_monitor_connect">
+                            <i class="glyphicon glyphicon-list-alt"></i> Connect
+                        </button></li>
+                        <li><div id="cb_cf_serial_monitor"></div></li>
+                        <br>
+                        <li><button class="btn btn-success" id="share_sketch">
+                            <i class="glyphicon glyphicon-send"></i> Share Sketch
+                        </button></li>
+                        <li id="generated_url"></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-md-9">
+                    <div id="sketch_filename_panel" class="row">
+                        {% if filename %}
+                        <input id="sketch_filename" type="text" placeholder="{{ filename }}" class="form-control">
+                        {% else %}
+                        <input id="sketch_filename" type="text" placeholder="Sketch filename..." class="form-control">
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        {% if code %}
+                        <pre id="editor">{{ code }}</pre>
+                        {% else %}
+                        <pre id="editor">/* This basic example turns the built in LED on for one second,</pre>
+                        {% endif %}
+                        <div id="additional_info_panel">
+                            <span id="editor_info_panel">
+                                <a id="reformat_code" href="javascript:void(0)" onclick="autoFormat();" data-toggle="tooltip" data-placement="top" title="Reformat Code">
+                                    <i class="icon-indent-right"></i>
+                                </a>
+                                <a id="show_keyboard_hotkeys" href="javascript:void(0)" onclick="showHotkeysModal()" data-toggle="tooltip" data-placement="top" title="Keyboard Shortcuts">
+                                    <i class="icon-keyboard"></i>
+                                </a>
+                            </span>
+                            <span id="compile_output_close">
+                                <button id="compiler_output_close_btn" type="button" class="close">x</button>
+                            </span>
+                            <span id="sketch_info">
+                                <div id="lines">Number of lines: <span id="line_count">0</span></div>
+                                <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
+                            </span>
+                            <pre id="compile_output"></pre>
+                            <div id="serial_monitor">
+                                <div id="cb_cf_serial_monitor"></div>
+                                <div id="cb_cf_operation_output"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+    
+<script src="../static/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://codebender.cc/embed/compilerflasher.js" type="text/javascript"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/textmate");
+    editor.getSession().setMode("ace/mode/c_cpp");
+    editor.setShowPrintMargin(false);
+    
+    editor.getSession().on('change', function(){
+        $("#line_count").html(editor.getSession().getValue().split("\n").length);
+    });
+
+    function getFiles(){
+        console.log("returning from get files");
+        return {"sketch.ino": editor.getSession().getValue()};
+    }
+
+    $(document).ready(function(){
+        $('#generated_url').hide();
+        $("#line_count").html(editor.getSession().getValue().split("\n").length);
+
+        console.log("docready");
+        compilerflasher = new compilerflasher(getFiles);
+        console.log("finished getting ready");
+
+        // creating a new sketch url
+        $('#share_sketch').click(function(){
+            console.log("submitting sketch");
+
+            // add sketch to database
+            $.post('/api/sketches', {
+                filename: $('#sketch_filename').val(),
+                description: $('#sketch_description').val(),
+                code: editor.getSession().getValue()
+
+            // retrieve sketch url postfix
+            }, function(data){
+                console.log("url: " + data);
+                $('#generated_url').append("<a href='/sketch/" + data + "'>/sketch/" + data + "</a>");
+                $('#generated_url').slideDown(400);
+            });
+        });
+    });
+</script>
+
+</div>
+</body>
+</html>
