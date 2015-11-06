@@ -18,8 +18,13 @@
         <div class="col-sm-12 col-md-12">
             <div class="row">
             {% if description %}
-            <h4>Sketch: {{ description }}</h4>
-            <input id="sketch_description" type="text" placeholder="{{ description }}" class="form-control">
+            <div id="description_body">
+                {% if filename %}
+                <span id="description_filename">{{ filename }}:</span>
+                {% else %}
+                {% endif %}
+                {{ description }}
+            </div>
             {% else %}
             <input id="sketch_description" type="text" placeholder="Sketch description..." class="form-control">
             {% endif %}
@@ -68,7 +73,21 @@
                         {% if code %}
                         <pre id="editor">{{ code }}</pre>
                         {% else %}
-                        <pre id="editor">/* This basic example turns the built in LED on for one second,</pre>
+                        <pre id="editor">
+                       // the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);              // wait for a second
+  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);              // wait for a second
+} 
+                        </pre>
                         {% endif %}
                         <div id="additional_info_panel">
                             <span id="editor_info_panel">
@@ -84,7 +103,7 @@
                             </span>
                             <span id="sketch_info">
                                 <div id="lines">Number of lines: <span id="line_count">0</span></div>
-                                <div id="sketch_size">Sketch size: <span id="sketch_size_number"></span> bytes</div>
+                                <div id="sketch_size">Sketch size: <span id="sketch_size_number">0</span> bytes</div>
                             </span>
                             <pre id="compile_output"></pre>
                             <div id="serial_monitor">
