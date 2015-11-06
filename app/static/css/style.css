@@ -18,7 +18,6 @@ h2 {
 }
 .navbar-brand {
     font-family: 'Patua One';
-    font-color: #000;
     font-size: 2.5em;
 }
 #container_top {
@@ -29,8 +28,18 @@ h2 {
     overflow-x: hidden;
     background: transparent;
 }
+#new_sketch {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #6F95BB;
+    font-weight: bold;
+}
+#new_sketch > a {
+    text-decoration: none;
+    color: #6F95BB;
+}
 #description_body {
-    padding: 10px;
+    padding-left: 15px;
     font-size: 1.1em;
     font-style: italic;
     color: #aaa;
@@ -76,7 +85,7 @@ h2 {
     border: 1px solid #ddd;
     border-right: none;
 }
-#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect, #share_sketch{
+#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect, #share_sketch {
     display:block;
     margin-bottom: 10px;
     background-color: #6F95BB;
@@ -97,7 +106,7 @@ h2 {
     display:block;
     width: 100%;
     border: 0;
-    background-color: #ccc;
+    background-color: #ddd;
     height: 35px;
     border-radius: 2px 0px 0px 0px;
 }
