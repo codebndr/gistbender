@@ -39,9 +39,10 @@ h2 {
     color: #6F95BB;
 }
 #description_body {
-    padding-left: 15px;
+    padding-left: 10px;
     font-size: 1.1em;
     font-style: italic;
+    border-left: 5px solid #ddd;
     color: #aaa;
     
 }
