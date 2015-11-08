@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+
+    "name": "Gistbender",
+    "description": "This extension allows the user to try Arduino sketches found on a website",
+    "version": "1.0",
+
+    "browser_action": {
+        "default_icon": "logo.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "https://ajax.googleapis.com/"
+    ]
+}
