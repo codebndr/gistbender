@@ -1,0 +1,21 @@
+#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect, #share_sketch {
+    display:block;
+    margin-bottom: 10px;
+    background-color: #6F95BB;
+    background-image:none;
+    width: 100%;
+    border:0;
+    border-radius: 0px 0px 0px 2px;
+}
+#cb_cf_boards, #cb_cf_ports, #cb_cf_programmers, #cb_cf_baud_rates {
+    display:block;
+    width: 100%;
+    border: 0;
+    background-color: #ddd;
+    height: 35px;
+    border-radius: 2px 0px 0px 0px;
+}
+#gistbender_options > li {
+    list-style-type: none !important;
+}
+

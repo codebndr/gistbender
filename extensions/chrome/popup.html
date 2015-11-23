@@ -6,32 +6,44 @@
  -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
-    </style>
+    <title>Gistbender</title>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="popup.js"></script>
+    <script src="jquery-1.11.3.min.js"></script>
+    <script src="compilerflasher.js"></script>
+
   </head>
   <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
+    <div id="container">
+      <ul class="nav nav-sidebar">
+          <li><select id="cb_cf_boards"></select></li>
+          <li><button class="btn btn-success" id="cb_cf_verify_btn" disabled="disabled">
+            <i class="glyphicon glyphicon-ok"></i> Verify Code
+          </button></li>
+          <li><select id="cb_cf_ports" class="dropdown-select"></select></li>
+          <li><button class="btn btn-success" id="cb_cf_flash_btn" disabled="disabled">
+            <i class="glyphicon glyphicon-arrow-right"></i> Run on Arduino
+          </button></li>
+          <li><select id="cb_cf_programmers"> </select></li>
+          <li><button class="btn btn-default" id="cb_cf_flash_with_prog_btn" disabled="disabled">
+          <i class="glyphicon glyphicon-upload"></i> Flash w/ Programmer
+          </button></li>
+          <li><span id="#speed_label">Speed:</span></li> 
+          <li><select id="cb_cf_baud_rates"></select></li>
+          <li><button class="btn btn-default" id="cb_cf_serial_monitor_connect">
+              <i class="glyphicon glyphicon-list-alt"></i> Connect
+          </button></li>
+          <li><div id="cb_cf_serial_monitor"></div></li>
+          <br>
+          <li><button class="btn btn-success" id="share_sketch">
+              <i class="glyphicon glyphicon-send"></i> Share Sketch
+          </button></li>
+          <li id="generated_url"></li>
+      </ul>
+
+      <div id="cb_cf_operation_output">hello</div>
+    </div>
   </body>
 </html>
 
