@@ -1,0 +1,157 @@
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+body {
+    padding-top: 65px;
+    overflow: hidden;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+h2 {
+    color: #aaa;
+}
+.navbar-brand {
+    font-family: 'Patua One';
+    font-size: 2.5em;
+}
+#container_top {
+    background: white;
+    padding: 0;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: transparent;
+}
+#new_sketch {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #6F95BB;
+    font-weight: bold;
+}
+#new_sketch > a {
+    text-decoration: none;
+    color: #6F95BB;
+}
+#description_body {
+    padding-left: 10px;
+    font-size: 1.1em;
+    font-style: italic;
+    border-left: 5px solid #ddd;
+    color: #aaa;
+    
+}
+#description_filename {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-style: normal;
+    color: #777;
+}
+#sketch_description {
+    background-color: #efefef;
+}
+#sketch_filename_panel {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    background-color: #eee;
+}
+#container_bottom {
+    margin-bottom: 10px;
+}
+#editor {
+    background: #fefefe;
+    margin-bottom: 0;
+    height: 400px;
+    border-bottom:10px solid #6F95BB;
+    border-radius: 0;
+}
+.compilerErrorMarker {
+    position: absolute;
+    background: #c80000;
+    background: rgba(120, 0, 0, 0.5);
+    z-index: 20; 
+}
+#selection {
+    width: 250px;
+}
+#controls {
+    padding: 10px 0px 10px 10px;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-right: none;
+}
+#cb_cf_verify_btn, #cb_cf_flash_btn, #cb_cf_flash_with_prog_btn, #cb_cf_serial_monitor_connect, #share_sketch {
+    display:block;
+    margin-bottom: 10px;
+    background-color: #6F95BB;
+    background-image:none;
+    width: 100%;
+    border:0;
+    border-radius: 0px 0px 0px 2px;
+}
+.navbar {
+    background-color: #fefefe; 
+    background-image: none;
+}
+#share_sketch {
+    margin-bottom:0;
+    border-radius: 2px 0px 0px 2px;
+}
+#cb_cf_boards, #cb_cf_ports, #cb_cf_programmers, #cb_cf_baud_rates {
+    display:block;
+    width: 100%;
+    border: 0;
+    background-color: #ddd;
+    height: 35px;
+    border-radius: 2px 0px 0px 0px;
+}
+#generated_url {
+    font-weight: bold;
+    padding: 10px;
+    background-color: #fff;
+}
+#compile_output {
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    visibility: hidden;
+    backround-image: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/wp-content/themes/tweaker6/images/bgnoise.gif);
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-width: 0;
+}
+#additional_info_panel {
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #eee;
+    padding: 10px;
+}
+#sketch_url {
+    background-color: #FDD;
+    padding: 10px;
+    border-radius: 2px; 
+}
+#serial_monitor {
+    background-color: #6F95BB;
+    margin-top: 10px;
+    border-radius: 2px;
+    padding: 10px;
+    color: #fff;
+}
+#serial_monitor > #cb_cf_operation_output > a {
+    color: #fff;
+    font-weight: bold;
+}
