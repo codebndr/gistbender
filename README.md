@@ -20,15 +20,19 @@ Gistbender is currently configured to run on a local machine.
 
 #### To run locally:
 
-Set up and run MongoDB
+Set up MongoDB
 ```
   sudo mkdir -p /data/db
   sudo chown -R `id -u` /data/db
   mongod --dbpath /data/db
 ```
-Run the server
+Install requirements
 ```
   pip install -r requirements.txt
+```
+Running MongoDB and the server
+```
+  mongod
   python /app/main.py
 ```
 Open a browser and navigate to
