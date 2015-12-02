@@ -1,14 +1,13 @@
 # gistbender
 
-To run Mongo:
+To set up and run MongoDB:
 ```
-  mkdir -p /data/db
-  chmod 0777 /data
-  chmod 0777 /data/db
+  sudo mkdir -p /data/db
+  sudo chown -R `id -u` /data/db
   mongod --dbpath /data/db
 ```
 To run the server:
 ```
   pip install -r requirements.txt
   python /app/main.py
-  ```
+```
