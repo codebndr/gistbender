@@ -15,7 +15,15 @@
     height: 35px;
     border-radius: 2px 0px 0px 0px;
 }
-#gistbender_options > li {
-    list-style-type: none !important;
+#cb_cf_operation_output {
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 2px;
 }
-
+#menu {
+    display:none;
+    width: 200px;
+    background-color: #aaa;
+    z-index: 1000;
+    padding: 10px;
+}
