@@ -41,3 +41,4 @@ Open a browser and navigate to
 Provided is a starting point for a Chrome extension.  Features implemented thus far include:
 * Scraping the page to identify and compile Arduino sketch code
 * Injecting codebender options directly into the page upon validation of code
+* _As of now, 'Share sketch' button does not link to gistbender app_
