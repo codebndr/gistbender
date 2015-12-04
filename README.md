@@ -14,11 +14,9 @@ It is built on the [Flask](http://flask.pocoo.org/) framework, using [MongoDB](h
 * _Work in progress:_ Chrome extension for identifying and capturing Arduino code in the current browser window
 
 
-## General
+## Run Locally
 
 Gistbender is currently configured to run on a local machine.
-
-#### To run locally:
 
 Set up MongoDB
 ```
@@ -39,3 +37,7 @@ Open a browser and navigate to
 ```
   localhost:8080
 ```
+## Chrome extension (Incomplete)
+Provided is a starting point for a Chrome extension.  Features implemented thus far include:
+* Scraping the page to identify and compile Arduino sketch code
+* Injecting codebender options directly into the page upon validation of code
