@@ -37,7 +37,7 @@ Open a browser and navigate to
 ```
   localhost:8080
 ```
-## Chrome extension (Incomplete)
+## Chrome Extension (incomplete)
 Provided is a starting point for a Chrome extension.  Features implemented thus far include:
 * Scraping the page to identify and compile Arduino sketch code
 * Injecting codebender options directly into the page upon validation of code
