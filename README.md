@@ -11,7 +11,7 @@ It is built on the [Flask](http://flask.pocoo.org/) framework, using [MongoDB](h
   * Console output
 * Unique URL generation for sharing
 * Workspace for editing sketches
-* _Work in progress:_ Chrome extension for identifying and capturing Arduino code in the current browser window
+* _Work in progress:_ Chrome extension for identifying and capturing Arduino code in the current browser window. You can find work around it in the *extensions* branch.
 
 
 ## Run Locally
