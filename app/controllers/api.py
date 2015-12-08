@@ -16,7 +16,6 @@ def add_sketch():
 
     hashUrl = hashlib.sha1((code + filename + description).encode("UTF-8")).hexdigest();
     hashUrl[:10]
-    print(hashUrl[:10])
 
     db.sketches.insert({
         'url': hashUrl[:10],
@@ -24,19 +23,19 @@ def add_sketch():
         'description': description,
         'code': code
     })
+
     return hashUrl[:10]
-    #return 'OK', 200
 
 @app.route('/api/sketches/<url_str>', methods=['GET'])
 def get_sketch_by_url(url_str):
     sketch = db.sketches.find_one({
         'url': url_str
     })
+
     data = {'url': sketch['url'],
             'filename': sketch['filename'],
             'description': sketch['description'],
             'code': sketch['code']
     }
-    #db.sketches.remove()
+
     return jsonify(**data)
-   # return 'OK', 200
